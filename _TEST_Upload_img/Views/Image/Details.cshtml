@@ -1,0 +1,50 @@
+﻿@model _TEST_Upload_img.ViewModels.ImageIndexData
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Images</h4>
+    <hr />
+    <img src="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)/@Html.DisplayFor(model => model.Image.Path)" style="display: inline" />
+    <h4><u><a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)/@Html.DisplayFor(model => model.Image.Path)">Download</a></u></h4>
+    
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Image.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Image.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Image.Path)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Image.Path)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Image.Tags)
+            </dt>
+            <dd>
+                <ul>
+                    @foreach (var item in Model.ImageTagJoins)
+                    {
+                        <li>
+                            @Html.ActionLink(item.Tag.Name, "Index", new { searchString = Html.DisplayFor(modelItem => item.Tag.Name) })
+                        </li>
+                    }
+                </ul>
+            </dd>
+
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Image.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

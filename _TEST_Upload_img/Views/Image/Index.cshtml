@@ -1,0 +1,45 @@
+﻿@model _TEST_Upload_img.ViewModels.TagIndexData
+
+@{
+    ViewBag.Title = "/ " + ViewBag.CurrentFilter;
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Image", FormMethod.Get))
+{
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="submit" value="Search" />
+}
+
+<div class="body-content" style="margin-top: 25px; padding: 10px;">
+    @if (ViewBag.ViewModelIsNull)
+    {
+        <p>There is nothing here.</p>
+    }
+    else
+    {
+        foreach (var item in Model.Images)
+        {
+            <div style="height: 195px; width: 180px; display: inline-block; text-align: center; vertical-align: middle;">
+                <span style="height:auto; width: auto; display: inline-block; text-align: center; vertical-align: middle;">
+                    <a style="position: relative; color: white;" href='@Url.Action("Details", "Image", new{ id = item.ID})'>
+                        <img src="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)/@Html.DisplayFor(modelItem => item.Path)" style="max-width: 150px;max-height: 150px;margin:0 auto;" class="img-responsive img-thumbnail" />
+                        <span style="float:left; position:relative; width:inherit; font-size:100%;display:block; float:none; margin:auto; position:static; background-color: #284a81;">
+                            @Html.DisplayFor(modelItem => item.Title) <br />
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </span>
+                    </a>
+                </span>
+            </div>
+        }
+    }
+
+</div>
+
