@@ -18,6 +18,12 @@ namespace _TEST_Upload_img
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            /*routes.MapRoute(
+                name: "CategorySet",
+                url: "{controller}/Index/{categoryID}",
+                defaults: new { controller = "Category", action = "Index", categoryID = "" }
+            );*/
         }
     }
 }

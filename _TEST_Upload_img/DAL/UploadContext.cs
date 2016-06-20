@@ -13,8 +13,10 @@ namespace _TEST_Upload_img.DAL
         }
 
         public DbSet<Image> Images { get; set; }
+        //Junction Table between the All-to-All relation images>-<tags
         public DbSet<ImageTagJoin> ImageTagJoins { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Category> Categories { get; set;  }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

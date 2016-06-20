@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -117,6 +118,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -128,11 +130,29 @@
     <Compile Include="Migrations\201506212011466_init.Designer.cs">
       <DependentUpon>201506212011466_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606062053458_AddCategory.cs" />
+    <Compile Include="Migrations\201606062053458_AddCategory.Designer.cs">
+      <DependentUpon>201606062053458_AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606062108157_RemoveAttributeOnCategory.cs" />
+    <Compile Include="Migrations\201606062108157_RemoveAttributeOnCategory.Designer.cs">
+      <DependentUpon>201606062108157_RemoveAttributeOnCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606062224227_AddCategoryOnImage.cs" />
+    <Compile Include="Migrations\201606062224227_AddCategoryOnImage.Designer.cs">
+      <DependentUpon>201606062224227_AddCategoryOnImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606151703163_CategoryLevelAdded.cs" />
+    <Compile Include="Migrations\201606151703163_CategoryLevelAdded.Designer.cs">
+      <DependentUpon>201606151703163_CategoryLevelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ImageTagJoin.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CategoryData.cs" />
     <Compile Include="ViewModels\ImageIndexData.cs" />
     <Compile Include="ViewModels\TagIndexData.cs" />
   </ItemGroup>
@@ -178,10 +198,16 @@
     <Content Include="Views\Image\Edit.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Upload\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
+    <Folder Include="Media\Category_Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -193,6 +219,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506212011466_init.resx">
       <DependentUpon>201506212011466_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606062053458_AddCategory.resx">
+      <DependentUpon>201606062053458_AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606062108157_RemoveAttributeOnCategory.resx">
+      <DependentUpon>201606062108157_RemoveAttributeOnCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606062224227_AddCategoryOnImage.resx">
+      <DependentUpon>201606062224227_AddCategoryOnImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606151703163_CategoryLevelAdded.resx">
+      <DependentUpon>201606151703163_CategoryLevelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

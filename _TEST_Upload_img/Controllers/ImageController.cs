@@ -27,6 +27,7 @@ namespace _TEST_Upload_img.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
+                //Tags is not case-sensitive
                 searchString = searchString.ToLower();
                 string[] tagSet = searchString.Split(' ').Distinct().ToArray();
 
@@ -39,7 +40,7 @@ namespace _TEST_Upload_img.Controllers
                 {
                     ViewBag.ViewModelIsNull = true;
                     return View(viewModel);
-                } 
+                }
 
                 viewModel.Images = db.Images.Where(
                                     a =>
@@ -81,6 +82,7 @@ namespace _TEST_Upload_img.Controllers
                 viewModel.ImageTagJoins = viewModel.Image.Tags;                 //Add the loaded tags into the viewModel
             }
 
+
             return View(viewModel);
         }
 
@@ -102,13 +104,15 @@ namespace _TEST_Upload_img.Controllers
             {
                 if (file != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("img file not null");
+                    System.Diagnostics.Debug.WriteLine("Image Controller :: POST :: Img file not null");
                     string pic = System.IO.Path.GetFileName(file.FileName);
                     string path = System.IO.Path.Combine(
                         Server.MapPath("~/images"), pic);
 
                     file.SaveAs(path);
                     images.Path = "images/" + pic;
+
+                    System.Diagnostics.Debug.WriteLine("Image Controller :: POST :: File "+pic+" uploaded.");
                 }
 
 
@@ -208,7 +212,10 @@ namespace _TEST_Upload_img.Controllers
             //Remove pic
             string path = System.AppDomain.CurrentDomain.BaseDirectory;
             System.Diagnostics.Debug.WriteLine("String path is == " + path);
-            System.IO.File.Delete(path + images.Path);
+            if (images.Path == "")
+            {
+                System.IO.File.Delete(path + images.Path);
+            }
 
             db.Images.Remove(images);
             db.SaveChanges();
